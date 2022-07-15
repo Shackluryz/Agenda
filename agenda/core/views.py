@@ -25,7 +25,8 @@ def submit_login(request):
 
 @login_required(login_url='/login/')
 def lista_eventos(request):
-  evento = Evento.objects.all()
+  usuario = request.user
+  evento = Evento.objects.filter(usuario=usuario)
   dados =  {'eventos':evento}
   return render(request, 'agenda.html', dados)
 
